@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use Illuminate\Http\Request;
+use DB;
 
 class TaskController extends Controller
 {
@@ -84,8 +85,23 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+        print_r($task->id);
+        die;
         $task = Task::findOrFail($id);
+        print_r($task);
+        die;
+
         $task->delete();
-        return 204;
+        // return 204;
+    }
+
+    public function deleteSkill(Request $request) {
+        $id = $request->input('id');
+        
+        if(!empty($id)) {
+            $query = DB::table('tasks')
+                ->where('id', $id)
+                ->delete();
+        }
     }
 }

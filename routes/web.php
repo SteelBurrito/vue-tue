@@ -17,4 +17,5 @@ Route::get('/', function () {
 
 Route::prefix('api')->group(function() {
     Route::resource('tasks', 'TaskController');
+    Route::post('/delete-skill')->uses('TaskController@deleteSkill')->name('delete-skill');
 });

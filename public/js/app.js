@@ -43040,13 +43040,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return console.error(err);
             });
         },
-        deleteTask: function deleteTask(id) {
-            var _this3 = this;
 
-            axios.delete('api/tasks/' + id).then(function (res) {
-                _this3.fetchTaskList();
-            }).catch(function (err) {
-                return console.error(err);
+
+        /* deleteTask(id) {
+            axios.delete('api/tasks/' + id)
+                .then((res) => {
+                    this.fetchTaskList();
+                })
+                .catch((err) => console.error(err));
+        }, */
+
+        deleteTask: function deleteTask(id) {
+            var vm = this;
+            var postData = {
+                id: id
+            };
+            axios.post('api/delete-skill', postData).then(function (res) {
+                // console.log(res);
+                vm.fetchTaskList();
             });
         }
     }
@@ -43116,7 +43127,7 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         _vm._l(_vm.list, function(task, index) {
-          return _c("li", { key: task.index, staticClass: "list-group-item" }, [
+          return _c("li", { key: index, staticClass: "list-group-item" }, [
             _vm._v("\n             " + _vm._s(task.body) + "\n             "),
             _c(
               "button",

@@ -13,7 +13,7 @@
         <h4>All Tasks</h4>
         <ul class="list-group">
             <li v-if='list.length === 0'>There are no tasks yet!</li>
-            <li class="list-group-item" v-for="(task, index) in list" :key="task.index">
+            <li class="list-group-item" v-for="(task, index) in list" v-bind:key="index">
                  {{ task.body }}
                  <button @click="deleteTask(task.id)" class="btn btn-danger btn-xs pull-right">Delete</button>
             </li>
@@ -50,18 +50,29 @@
                         this.task.body = '';
                         this.edit = false;
                         this.fetchTaskList();
-
                     })
                     .catch((err) => console.error(err));
             },
  
-            deleteTask(id) {
+            /* deleteTask(id) {
                 axios.delete('api/tasks/' + id)
                     .then((res) => {
-                        this.fetchTaskList()
+                        this.fetchTaskList();
                     })
                     .catch((err) => console.error(err));
-            },
+            }, */
+
+            deleteTask(id) {
+                var vm = this;
+                let postData = {
+                    id: id
+                };
+                axios.post('api/delete-skill', postData)
+                    .then(function(res) {
+                        // console.log(res);
+                        vm.fetchTaskList();
+                    });
+            }
         }
     }
 </script>
