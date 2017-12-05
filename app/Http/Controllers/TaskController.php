@@ -14,7 +14,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        return Task::latest()->get();
     }
 
     /**
@@ -35,7 +35,11 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'body' => 'required|max:500'
+        ]);
+
+        return Task::create([ 'body' => request('body') ]);
     }
 
     /**
@@ -80,6 +84,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task = Task::findOrFail($id);
+        $task->delete();
+        return 204;
     }
 }
