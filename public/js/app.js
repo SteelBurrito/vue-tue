@@ -988,6 +988,7 @@ window.Vue = __webpack_require__(35);
  */
 
 Vue.component('example-component', __webpack_require__(38));
+Vue.component('task-list', __webpack_require__(52));
 
 var app = new Vue({
   el: '#app'
@@ -42917,6 +42918,247 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(39)
+/* script */
+var __vue_script__ = __webpack_require__(53)
+/* template */
+var __vue_template__ = __webpack_require__(54)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\TaskList.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3512c68c", Component.options)
+  } else {
+    hotAPI.reload("data-v-3512c68c", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            list: [],
+            task: {
+                id: '',
+                body: ''
+            }
+        };
+    },
+    created: function created() {
+        this.fetchTaskList();
+    },
+
+
+    methods: {
+        fetchTaskList: function fetchTaskList() {
+            var _this = this;
+
+            axios.get('api/tasks').then(function (res) {
+                _this.list = res.data;
+            });
+        },
+        createTask: function createTask() {
+            var _this2 = this;
+
+            axios.post('api/tasks', this.task).then(function (res) {
+                _this2.task.body = '';
+                _this2.edit = false;
+                _this2.fetchTaskList();
+            }).catch(function (err) {
+                return console.error(err);
+            });
+        },
+        deleteTask: function deleteTask(id) {
+            var _this3 = this;
+
+            axios.delete('api/tasks/' + id).then(function (res) {
+                _this3.fetchTaskList();
+            }).catch(function (err) {
+                return console.error(err);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("h1", [_vm._v("My Tasks")]),
+    _vm._v(" "),
+    _c("h4", [_vm._v("New Task")]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        attrs: { action: "#" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.createTask()
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "input-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.task.body,
+                expression: "task.body"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "body", autofocus: "" },
+            domProps: { value: _vm.task.body },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.task, "body", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(0, false, false)
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c("h4", [_vm._v("All Tasks")]),
+    _vm._v(" "),
+    _c(
+      "ul",
+      { staticClass: "list-group" },
+      [
+        _vm.list.length === 0
+          ? _c("li", [_vm._v("There are no tasks yet!")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm._l(_vm.list, function(task, index) {
+          return _c("li", { key: task.index, staticClass: "list-group-item" }, [
+            _vm._v("\n             " + _vm._s(task.body) + "\n             "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-xs pull-right",
+                on: {
+                  click: function($event) {
+                    _vm.deleteTask(task.id)
+                  }
+                }
+              },
+              [_vm._v("Delete")]
+            )
+          ])
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("New Task")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3512c68c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
