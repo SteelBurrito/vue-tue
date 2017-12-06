@@ -17,7 +17,28 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('task-list', require('./components/TaskList.vue'));
+Vue.component('extraPage', require('./components/ExampleComponent.vue'));
 
+/* VueJS Routes */
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+
+const routes = [
+    {
+        path: '/',
+        name: 'task-list',
+        component: require('./components/TaskList.vue')
+    },
+    {
+        path: '/extra',
+        name: 'extraPage',
+        component: require('./components/ExampleComponent.vue')
+    }
+]
+
+const router = new VueRouter({ routes });
+
+//create dat vuejs root instance
 const app = new Vue({
     el: '#app'
 });
