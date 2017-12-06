@@ -43040,16 +43040,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return console.error(err);
             });
         },
-
-
-        /* deleteTask(id) {
-            axios.delete('api/tasks/' + id)
-                .then((res) => {
-                    this.fetchTaskList();
-                })
-                .catch((err) => console.error(err));
-        }, */
-
         deleteTask: function deleteTask(id) {
             var vm = this;
             var postData = {

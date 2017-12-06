@@ -1,6 +1,5 @@
 <template>
     <div class='row'>
-        <h1>My Tasks</h1>
         <h4>New Task</h4>
         <form action="#" @submit.prevent="createTask()">
             <div class="input-group">
@@ -54,14 +53,6 @@
                     .catch((err) => console.error(err));
             },
  
-            /* deleteTask(id) {
-                axios.delete('api/tasks/' + id)
-                    .then((res) => {
-                        this.fetchTaskList();
-                    })
-                    .catch((err) => console.error(err));
-            }, */
-
             deleteTask(id) {
                 var vm = this;
                 let postData = {
